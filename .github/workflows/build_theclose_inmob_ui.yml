@@ -1,4 +1,4 @@
-name: Build & Push Docker Image (ZyM Accounting)
+name: Build & Push Docker Image (TheClose Inmob)
 
 on:
   push:
@@ -19,10 +19,10 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Build and push ZyM Accounting image
+    - name: Build and push TheClose Inmob image
       uses: docker/build-push-action@v5
       with:
         context: .
         file: ./Dockerfile
         push: true
-        tags: alienzimzum/zym-accounting:latest
+        tags: alienzimzum/theclose-inmob:latest
