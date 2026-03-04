@@ -1,0 +1,58 @@
+# venv / env
+venv/
+venv_crossenc/
+config/depoy_config/zz_lottery_ticket/.env
+*.env
+.env_*
+.env.*
+config/certs/
+# app
+__pycache__/
+*.py[cod]
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# datos locales / artefactos
+vectorstores/
+exports/
+data/documents/
+*.faiss
+*.pkl
+
+# ⛔ secretos / credenciales
+config/*.json
+config/token.json
+config/deploy_config/
+*.pem
+*.p12
+*.p8
+*.key
+*credentials*.json
+-e "config/*.json\n.env\nvectorstores/\nexports/\ndata/documents/"
+
+# Cachés y checkpoints
+*.checkpoint
+*.ckpt
+*.h5
+
+# CSV / datasets locales
+*.csv
+*.tsv
+*.xlsx
+*.parquet
+
+# Excepción: archivos estáticos que SÍ deben subirse al repo
+!static/downloads/modelo_facturacion.xlsx
+
+# Archivos de debugging
+debug/
+logs/
+
+last-commit.patch
+*.patch
+exports\
+exports\debug\
