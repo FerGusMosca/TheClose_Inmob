@@ -5,7 +5,7 @@
 {% block page_title %}Dashboard{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="/static/css/dashboard.css">
+<link rel="stylesheet" href="/static/css/dashboard.css?v={{ version }}">
 {% endblock %}
 
 {% block content %}
@@ -66,7 +66,7 @@
                 <button class="chat-example-btn" onclick="goToSearch(this)">💬 Mejor relación precio/m² cerca del subte D</button>
                 <button class="chat-example-btn" onclick="goToSearch(this)">💬 Departamentos con amenities en Palermo</button>
             </div>
-            <a href="/busqueda" class="btn-primary">Abrir buscador IA →</a>
+            <a href="/search" class="btn-primary">Abrir buscador IA →</a>
         </div>
     </div>
 
@@ -127,5 +127,5 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="/static/js/dashboard.js"></script>
+<script src="/static/js/dashboard.js?v={{ version }}"></script>
 {% endblock %}

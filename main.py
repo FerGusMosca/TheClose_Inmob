@@ -2,16 +2,32 @@ from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
+import subprocess
 import uvicorn
 from starlette.middleware.sessions import SessionMiddleware
 from common.config.settings import get_settings
 from controllers.dashboard_controller import DashboardController
 from controllers.property_controller import PropertyController
 from controllers.admin_controller import AdminController
+from controllers.search_controller import SearchController
+
+
+def _get_version() -> str:
+    """Returns short git commit hash, used as cache-busting querystring for static assets."""
+    try:
+        return subprocess.check_output(
+            ["git", "rev-parse", "--short", "HEAD"],
+            stderr=subprocess.DEVNULL
+        ).decode().strip()
+    except Exception:
+        return "1"
+
 
 settings = get_settings()
-app = FastAPI()
+app      = FastAPI()
+
 templates = Jinja2Templates(directory="templates")
+templates.env.globals["version"] = _get_version()  # available in ALL templates as {{ version }}
 
 app.add_middleware(SessionMiddleware, secret_key=settings.session_key)
 
@@ -39,6 +55,9 @@ app.include_router(properties.router)
 
 admin = AdminController()
 app.include_router(admin.router)
+
+search = SearchController()
+app.include_router(search.router)
 
 
 # ===========================

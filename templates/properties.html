@@ -5,7 +5,7 @@
 {% block page_title %}Properties{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="/static/css/properties.css">
+<link rel="stylesheet" href="/static/css/properties.css?v={{ version }}">
 {% endblock %}
 
 {% block content %}
@@ -166,5 +166,5 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="/static/js/properties.js"></script>
+<script src="/static/js/properties.js?v={{ version }}"></script>
 {% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Búsqueda IA{% endblock %}
+{% block nav_search %}active{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/search.css?v={{ version }}">
+{% endblock %}
+
+{% block content %}
+<div class="search-wrap">
+
+    <!-- ── HERO ── -->
+    <div class="search-hero">
+        <div class="hero-eyebrow">Búsqueda Inteligente</div>
+        <h1 class="hero-title">Preguntá sobre el<br>mercado inmobiliario</h1>
+        <p class="hero-sub">Consultá precios, compará barrios, encontrá oportunidades. Respuestas en lenguaje natural con datos reales.</p>
+    </div>
+
+    <!-- ── SUGGESTIONS ── -->
+    <div class="suggestions-row" id="suggestions-row">
+        <button class="suggestion-chip" onclick="submitSuggestion(this)">Precio promedio 2 ambientes en Recoleta</button>
+        <button class="suggestion-chip" onclick="submitSuggestion(this)">Mejor relación precio/m² cerca del subte D</button>
+        <button class="suggestion-chip" onclick="submitSuggestion(this)">Departamentos con amenities en Palermo</button>
+        <button class="suggestion-chip" onclick="submitSuggestion(this)">3 ambientes bajo USD 200.000 en Belgrano</button>
+    </div>
+
+    <!-- ── INPUT ── -->
+    <div class="search-input-wrap">
+        <div class="search-input-box" id="search-box">
+            <textarea
+                id="search-input"
+                class="search-textarea"
+                placeholder="Ej: ¿Cuál es el precio promedio por m² en Belgrano?"
+                rows="1"
+                onkeydown="handleKey(event)"
+                oninput="autoResize(this)"
+            ></textarea>
+            <button class="search-btn" id="search-btn" onclick="submitQuery()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="send-icon">
+                    <path d="M22 2L11 13"/>
+                    <path d="M22 2L15 22 11 13 2 9l20-7z"/>
+                </svg>
+            </button>
+        </div>
+        <div class="search-input-footer">
+            <span class="search-hint">Enter para enviar · Shift+Enter para nueva línea</span>
+            <span class="search-status" id="search-status"></span>
+        </div>
+    </div>
+
+    <!-- ── RESULTS ── -->
+    <div class="results-wrap" id="results-wrap" style="display:none">
+
+        <div class="query-echo" id="query-echo"></div>
+
+        <!-- LLM Answer -->
+        <div class="answer-panel" id="answer-panel">
+            <div class="answer-text" id="answer-text"></div>
+            <span class="answer-cursor" id="answer-cursor"></span>
+        </div>
+
+        <!-- Property cards -->
+        <div class="cards-section" id="cards-section" style="display:none">
+            <div class="cards-section-label">Propiedades encontradas</div>
+            <div class="search-cards-grid" id="search-cards-grid"></div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/search.js?v={{ version }}"></script>
+{% endblock %}

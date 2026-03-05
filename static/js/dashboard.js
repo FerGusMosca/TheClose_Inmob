@@ -1,7 +1,7 @@
 // ── NAVIGATE TO SEARCH WITH PREFILL ───────
 function goToSearch(btn) {
     const text = btn.textContent.replace(/^💬\s*/, '').trim();
-    window.location.href = `/busqueda?q=${encodeURIComponent(text)}`;
+    window.location.href = `/search?q=${encodeURIComponent(text)}`;
 }
 
 // ── ANIMATE KPI COUNTERS ──────────────────

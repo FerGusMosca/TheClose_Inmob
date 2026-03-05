@@ -5,7 +5,7 @@
 {% block page_title %}Data Management{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="/static/css/admin.css">
+<link rel="stylesheet" href="/static/css/admin.css?v={{ version }}">
 {% endblock %}
 
 {% block content %}
@@ -205,5 +205,5 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="/static/js/admin.js"></script>
+<script src="/static/js/admin.js?v={{ version }}"></script>
 {% endblock %}

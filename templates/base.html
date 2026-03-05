@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/base.css?v={{ version }}">
     {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -44,7 +44,7 @@
                 </span>
                 <span>Propiedades</span>
             </a>
-            <a href="/busqueda" class="nav-item {% block nav_busqueda %}{% endblock %}">
+            <a href="/search" class="nav-item {% block nav_busqueda %}{% endblock %}">
                 <span class="nav-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <circle cx="11" cy="11" r="7"/>
@@ -126,7 +126,7 @@
         {% block content %}{% endblock %}
     </main>
 
-    <script src="/static/js/base.js"></script>
+    <script src="/static/js/base.js?v={{ version }}"></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>
