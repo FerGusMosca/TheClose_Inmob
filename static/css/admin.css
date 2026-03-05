@@ -1,0 +1,399 @@
+/* =============================================
+   THECLOSE — ADMIN / DATA MANAGEMENT
+   ============================================= */
+
+.admin-wrap {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    max-width: 1200px;
+}
+
+/* ─── HEADER ──────────────────────────────── */
+
+.admin-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.admin-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--white);
+    margin: 0 0 6px;
+}
+
+.admin-subtitle {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.pipeline-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-panel);
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    transition: background 0.3s ease;
+}
+
+.status-dot.running {
+    background: #fbbf24;
+    box-shadow: 0 0 8px rgba(251,191,36,0.5);
+    animation: pulse-dot 1.2s ease infinite;
+}
+
+.status-dot.done    { background: #34d399; }
+.status-dot.error   { background: #f87171; }
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
+}
+
+.status-label {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* ─── STEPS GRID ──────────────────────────── */
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+    gap: 1px;
+    background: var(--border);
+}
+
+.step-card {
+    background: var(--bg-panel);
+    padding: 28px;
+    display: flex;
+    gap: 20px;
+    position: relative;
+    transition: background 0.2s ease;
+}
+
+.step-card.running { background: rgba(251,191,36,0.04); }
+.step-card.done    { background: rgba(52,211,153,0.04); }
+.step-card.error   { background: rgba(248,113,113,0.04); }
+
+/* Step number */
+.step-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    color: var(--border);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 48px;
+    transition: color 0.3s ease;
+}
+
+.step-card.running .step-number { color: rgba(251,191,36,0.3); }
+.step-card.done    .step-number { color: rgba(52,211,153,0.3); }
+.step-card.error   .step-number { color: rgba(248,113,113,0.3); }
+
+.step-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Step header */
+.step-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.step-title {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.step-meta {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--text-muted);
+    font-family: 'Courier New', monospace;
+}
+
+/* Badges */
+.step-badge {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.badge--argenprop {
+    background: rgba(16,185,129,0.12);
+    color: #34d399;
+    border: 1px solid rgba(16,185,129,0.25);
+}
+
+.badge--zonaprop {
+    background: rgba(59,130,246,0.12);
+    color: #60a5fa;
+    border: 1px solid rgba(59,130,246,0.25);
+}
+
+.badge--db {
+    background: rgba(139,92,246,0.12);
+    color: #a78bfa;
+    border: 1px solid rgba(139,92,246,0.25);
+}
+
+.badge--ai {
+    background: rgba(201,168,76,0.12);
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.25);
+}
+
+/* Controls */
+.step-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.control-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.control-select,
+.control-input {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    padding: 7px 10px;
+    border-radius: var(--radius);
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.control-select { min-width: 140px; }
+.control-input  { width: 72px; }
+
+.control-select:focus,
+.control-input:focus { border-color: var(--gold-dim); }
+
+.control-select option { background: var(--bg-panel); }
+
+.checkbox-row {
+    display: flex;
+    gap: 12px;
+    padding: 7px 0;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-soft);
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    accent-color: var(--gold);
+    width: 13px;
+    height: 13px;
+}
+
+.step-desc {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 320px;
+}
+
+.step-desc code {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 1px 5px;
+    border-radius: 2px;
+    font-size: 10px;
+    color: var(--gold);
+}
+
+/* Run button */
+.btn-run {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.btn-run:hover {
+    border-color: var(--gold-dim);
+    color: var(--gold);
+}
+
+.btn-run:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    border-color: var(--border);
+    color: var(--text-muted);
+}
+
+.btn-run.running {
+    border-color: #fbbf24;
+    color: #fbbf24;
+}
+
+.btn-icon { font-size: 10px; }
+
+/* Progress bar */
+.step-progress {
+    height: 2px;
+    background: var(--border);
+    border-radius: 1px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--gold);
+    transition: width 0.4s ease;
+    border-radius: 1px;
+}
+
+.progress-bar.running {
+    width: 100%;
+    background: linear-gradient(90deg, var(--gold), #fbbf24, var(--gold));
+    background-size: 200% 100%;
+    animation: shimmer 1.5s linear infinite;
+}
+
+.progress-bar.done  { width: 100%; background: #34d399; }
+.progress-bar.error { width: 100%; background: #f87171; }
+
+@keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ─── LOG CONSOLE ─────────────────────────── */
+
+.log-panel {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: #0a0a0a;
+    overflow: hidden;
+}
+
+.log-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-panel);
+}
+
+.log-title {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.log-clear {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 2px 8px;
+    transition: color 0.2s;
+}
+
+.log-clear:hover { color: var(--text-soft); }
+
+.log-body {
+    height: 300px;
+    overflow-y: auto;
+    padding: 12px 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    line-height: 1.7;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+}
+
+.log-line { color: #6b7280; }
+.log-line--system { color: #374151; font-style: italic; }
+.log-line--info   { color: #9ca3af; }
+.log-line--ok     { color: #34d399; }
+.log-line--warn   { color: #fbbf24; }
+.log-line--error  { color: #f87171; }
+
+/* ─── RESPONSIVE ──────────────────────────── */
+
+@media (max-width: 768px) {
+    .admin-wrap   { padding: 20px; }
+    .steps-grid   { grid-template-columns: 1fr; }
+    .admin-header { flex-direction: column; }
+}

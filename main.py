@@ -7,6 +7,7 @@ from starlette.middleware.sessions import SessionMiddleware
 from common.config.settings import get_settings
 from controllers.dashboard_controller import DashboardController
 from controllers.property_controller import PropertyController
+from controllers.admin_controller import AdminController
 
 settings = get_settings()
 app = FastAPI()
@@ -35,6 +36,9 @@ app.include_router(main_dashboard.router)
 
 properties = PropertyController()
 app.include_router(properties.router)
+
+admin = AdminController()
+app.include_router(admin.router)
 
 
 # ===========================

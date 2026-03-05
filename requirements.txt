@@ -29,3 +29,10 @@ pytz==2025.2
 # Testing
 pytest==8.4.1
 psycopg2
+
+
+#LLM
+openai
+bs4
+selenium
+undetected_chromedriver

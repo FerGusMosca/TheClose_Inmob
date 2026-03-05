@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+
+{% block title %}Data Management{% endblock %}
+{% block nav_admin %}active{% endblock %}
+{% block page_title %}Data Management{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/admin.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="admin-wrap">
+
+    <!-- HEADER -->
+    <div class="admin-header">
+        <div class="admin-header-text">
+            <h2 class="admin-title">Data Pipeline</h2>
+            <p class="admin-subtitle">Scrape portals, load properties into the database, and generate embeddings.</p>
+        </div>
+        <div class="pipeline-status" id="pipeline-status">
+            <span class="status-dot" id="global-dot"></span>
+            <span class="status-label" id="global-label">Idle</span>
+        </div>
+    </div>
+
+    <!-- STEPS -->
+    <div class="steps-grid">
+
+        <!-- ── STEP 1A: Argenprop ── -->
+        <div class="step-card" id="card-scrape_argenprop">
+            <div class="step-number">01</div>
+            <div class="step-content">
+                <div class="step-header">
+                    <div>
+                        <div class="step-title">Scrape Argenprop</div>
+                        <div class="step-meta" id="meta-scrape_argenprop">Ready</div>
+                    </div>
+                    <span class="step-badge badge--argenprop">argenprop</span>
+                </div>
+
+                <div class="step-controls">
+                    <div class="control-group">
+                        <label class="control-label">Neighborhood</label>
+                        <select class="control-select" id="ap-neighborhood">
+                            <option value="belgrano">Belgrano</option>
+                            <option value="palermo">Palermo</option>
+                            <option value="recoleta">Recoleta</option>
+                            <option value="nunez">Nuñez</option>
+                            <option value="caballito">Caballito</option>
+                            <option value="villa-urquiza">Villa Urquiza</option>
+                            <option value="almagro">Almagro</option>
+                            <option value="flores">Flores</option>
+                            <option value="san-telmo">San Telmo</option>
+                            <option value="puerto-madero">Puerto Madero</option>
+                            <option value="barrio-norte">Barrio Norte</option>
+                            <option value="villa-crespo">Villa Crespo</option>
+                            <option value="colegiales">Colegiales</option>
+                            <option value="saavedra">Saavedra</option>
+                            <option value="boedo">Boedo</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Max pages</label>
+                        <input type="number" class="control-input" id="ap-pages" value="3" min="1" max="20">
+                    </div>
+                    <button class="btn-run" id="btn-scrape_argenprop"
+                            onclick="runScrape('argenprop')">
+                        <span class="btn-icon">▶</span> Run
+                    </button>
+                </div>
+
+                <div class="step-progress" id="progress-scrape_argenprop">
+                    <div class="progress-bar" id="bar-scrape_argenprop"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── STEP 1B: Zonaprop ── -->
+        <div class="step-card" id="card-scrape_zonaprop">
+            <div class="step-number">02</div>
+            <div class="step-content">
+                <div class="step-header">
+                    <div>
+                        <div class="step-title">Scrape Zonaprop</div>
+                        <div class="step-meta" id="meta-scrape_zonaprop">Ready</div>
+                    </div>
+                    <span class="step-badge badge--zonaprop">zonaprop</span>
+                </div>
+
+                <div class="step-controls">
+                    <div class="control-group">
+                        <label class="control-label">Neighborhood</label>
+                        <select class="control-select" id="zp-neighborhood">
+                            <option value="belgrano">Belgrano</option>
+                            <option value="palermo">Palermo</option>
+                            <option value="recoleta">Recoleta</option>
+                            <option value="nunez">Nuñez</option>
+                            <option value="caballito">Caballito</option>
+                            <option value="villa-urquiza">Villa Urquiza</option>
+                            <option value="almagro">Almagro</option>
+                            <option value="flores">Flores</option>
+                            <option value="san-telmo">San Telmo</option>
+                            <option value="puerto-madero">Puerto Madero</option>
+                            <option value="barrio-norte">Barrio Norte</option>
+                            <option value="villa-crespo">Villa Crespo</option>
+                            <option value="colegiales">Colegiales</option>
+                            <option value="saavedra">Saavedra</option>
+                            <option value="boedo">Boedo</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Max pages</label>
+                        <input type="number" class="control-input" id="zp-pages" value="3" min="1" max="20">
+                    </div>
+                    <button class="btn-run" id="btn-scrape_zonaprop"
+                            onclick="runScrape('zonaprop')">
+                        <span class="btn-icon">▶</span> Run
+                    </button>
+                </div>
+
+                <div class="step-progress" id="progress-scrape_zonaprop">
+                    <div class="progress-bar" id="bar-scrape_zonaprop"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── STEP 2: Insert ── -->
+        <div class="step-card" id="card-insert">
+            <div class="step-number">03</div>
+            <div class="step-content">
+                <div class="step-header">
+                    <div>
+                        <div class="step-title">Load to Database</div>
+                        <div class="step-meta" id="meta-insert">Ready</div>
+                    </div>
+                    <span class="step-badge badge--db">PostgreSQL</span>
+                </div>
+
+                <div class="step-controls">
+                    <div class="control-group">
+                        <label class="control-label">Portals</label>
+                        <div class="checkbox-row">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="ins-argenprop" checked> Argenprop
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="ins-zonaprop" checked> Zonaprop
+                            </label>
+                        </div>
+                    </div>
+                    <button class="btn-run" id="btn-insert" onclick="runInsert()">
+                        <span class="btn-icon">▶</span> Run
+                    </button>
+                </div>
+
+                <div class="step-progress" id="progress-insert">
+                    <div class="progress-bar" id="bar-insert"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── STEP 3: Embed ── -->
+        <div class="step-card" id="card-embed">
+            <div class="step-number">04</div>
+            <div class="step-content">
+                <div class="step-header">
+                    <div>
+                        <div class="step-title">Generate Embeddings</div>
+                        <div class="step-meta" id="meta-embed">Ready</div>
+                    </div>
+                    <span class="step-badge badge--ai">OpenAI</span>
+                </div>
+
+                <div class="step-controls">
+                    <p class="step-desc">
+                        Generates <code>text-embedding-3-small</code> vectors for all
+                        properties without embeddings. Batched in groups of 20.
+                    </p>
+                    <button class="btn-run" id="btn-embed" onclick="runEmbed()">
+                        <span class="btn-icon">▶</span> Run
+                    </button>
+                </div>
+
+                <div class="step-progress" id="progress-embed">
+                    <div class="progress-bar" id="bar-embed"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- LIVE LOG CONSOLE -->
+    <div class="log-panel">
+        <div class="log-header">
+            <span class="log-title">Live Log</span>
+            <button class="log-clear" onclick="clearLog()">Clear</button>
+        </div>
+        <div class="log-body" id="log-body">
+            <div class="log-line log-line--system">── Pipeline console ready ──</div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/admin.js"></script>
+{% endblock %}
