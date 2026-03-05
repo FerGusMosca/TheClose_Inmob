@@ -1,5 +1,6 @@
 # venv / env
 venv/
+data/
 venv_crossenc/
 config/depoy_config/zz_lottery_ticket/.env
 *.env

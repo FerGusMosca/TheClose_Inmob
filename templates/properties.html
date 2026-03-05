@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block title %}Properties{% endblock %}
+{% block nav_propiedades %}active{% endblock %}
+{% block page_title %}Properties{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/properties.css">
+{% endblock %}
+
+{% block content %}
+
+<!-- FILTERS BAR -->
+<div class="filters-bar">
+    <form class="filters-form" method="get" action="/properties">
+
+        <div class="filter-group">
+            <label class="filter-label">Neighborhood</label>
+            <select name="neighborhood" class="filter-select">
+                <option value="">All</option>
+                {% for n in neighborhoods %}
+                <option value="{{ n.slug }}" {% if filters.neighborhood == n.slug %}selected{% endif %}>
+                    {{ n.name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label class="filter-label">Rooms</label>
+            <select name="ambientes" class="filter-select">
+                <option value="">All</option>
+                {% for i in range(1, 7) %}
+                <option value="{{ i }}" {% if filters.ambientes == i %}selected{% endif %}>
+                    {{ i }} rooms
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label class="filter-label">Min price (USD)</label>
+            <input type="number" name="price_min" class="filter-input"
+                   placeholder="0"
+                   value="{{ filters.price_min if filters.price_min else '' }}">
+        </div>
+
+        <div class="filter-group">
+            <label class="filter-label">Max price (USD)</label>
+            <input type="number" name="price_max" class="filter-input"
+                   placeholder="No limit"
+                   value="{{ filters.price_max if filters.price_max else '' }}">
+        </div>
+
+        <div class="filter-group">
+            <label class="filter-label">Portal</label>
+            <select name="source" class="filter-select">
+                <option value="">All</option>
+                <option value="zonaprop"  {% if filters.source == 'zonaprop'  %}selected{% endif %}>ZonaProp</option>
+                <option value="argenprop" {% if filters.source == 'argenprop' %}selected{% endif %}>ArgenProp</option>
+            </select>
+        </div>
+
+        <div class="filter-actions">
+            <button type="submit" class="btn-filter">Filter</button>
+            <a href="/properties" class="btn-clear">Clear</a>
+        </div>
+
+    </form>
+</div>
+
+<!-- RESULTS HEADER -->
+<div class="results-header">
+    <span class="results-count">
+        {% if properties %}
+            {{ properties|length }} properties
+            {% if filters.neighborhood or filters.ambientes or filters.price_min or filters.price_max %}
+            <span class="results-filtered">— filtered</span>
+            {% endif %}
+        {% else %}
+            No results
+        {% endif %}
+    </span>
+</div>
+
+<!-- PROPERTY CARDS GRID -->
+{% if properties %}
+<div class="cards-grid">
+    {% for p in properties %}
+    <div class="prop-card" onclick="window.open('{{ p.url }}', '_blank')">
+
+        <!-- Card header: source badge + neighborhood -->
+        <div class="prop-card-header">
+            <span class="prop-source prop-source--{{ p.source }}">{{ p.source }}</span>
+            {% if p.neighborhood %}
+            <span class="prop-neighborhood">{{ p.neighborhood }}</span>
+            {% endif %}
+        </div>
+
+        <!-- Card body: price, title, address -->
+        <div class="prop-card-body">
+            <div class="prop-price">
+                {% if p.price %}
+                    <span class="prop-currency">{{ p.currency or 'USD' }}</span>
+                    <span class="prop-amount">{{ "{:,.0f}".format(p.price).replace(",", ".") }}</span>
+                {% else %}
+                    <span class="prop-no-price">On request</span>
+                {% endif %}
+            </div>
+
+            {% if p.expensas %}
+            <div class="prop-expensas">
+                + {{ p.expensas_currency }} {{ "{:,.0f}".format(p.expensas).replace(",", ".") }} exp.
+            </div>
+            {% endif %}
+
+            <div class="prop-title">{{ p.title or 'No title' }}</div>
+
+            {% if p.address %}
+            <div class="prop-address">📍 {{ p.address }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Card footer: chips with key attributes -->
+        <div class="prop-card-footer">
+            {% if p.ambientes %}
+            <span class="prop-chip">{{ p.ambientes }} rooms</span>
+            {% endif %}
+            {% if p.dormitorios %}
+            <span class="prop-chip">{{ p.dormitorios }} bed.</span>
+            {% endif %}
+            {% if p.banos %}
+            <span class="prop-chip">{{ p.banos }} bath.</span>
+            {% endif %}
+            {% if p.m2_total %}
+            <span class="prop-chip">{{ p.m2_total|int }} m²</span>
+            {% endif %}
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+
+<!-- PAGINATION -->
+<div class="pagination">
+    {% if page > 1 %}
+    <a href="?page={{ page - 1 }}&neighborhood={{ filters.neighborhood or '' }}&ambientes={{ filters.ambientes or '' }}&price_min={{ filters.price_min or '' }}&price_max={{ filters.price_max or '' }}&source={{ filters.source or '' }}"
+       class="btn-page">← Previous</a>
+    {% endif %}
+    <span class="page-info">Page {{ page }}</span>
+    {% if has_more %}
+    <a href="?page={{ page + 1 }}&neighborhood={{ filters.neighborhood or '' }}&ambientes={{ filters.ambientes or '' }}&price_min={{ filters.price_min or '' }}&price_max={{ filters.price_max or '' }}&source={{ filters.source or '' }}"
+       class="btn-page">Next →</a>
+    {% endif %}
+</div>
+
+{% else %}
+<!-- Empty state -->
+<div class="empty-state">
+    <div class="empty-icon">🏢</div>
+    <p>No properties found with those filters.</p>
+    <a href="/properties" class="btn-filter">View all</a>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/properties.js"></script>
+{% endblock %}

@@ -1,0 +1,342 @@
+/* =============================================
+   THECLOSE — PROPERTIES PAGE
+   ============================================= */
+
+/* ─── FILTERS BAR ─────────────────────────── */
+
+.filters-bar {
+    padding: 24px 40px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-panel);
+}
+
+.filters-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 140px;
+}
+
+.filter-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.filter-select,
+.filter-input {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    outline: none;
+    transition: border-color 0.2s ease;
+    min-width: 140px;
+}
+
+.filter-select:focus,
+.filter-input:focus {
+    border-color: var(--gold-dim);
+}
+
+.filter-select option {
+    background: var(--bg-panel);
+}
+
+.filter-actions {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+    padding-bottom: 1px;
+}
+
+.btn-filter {
+    background: var(--gold);
+    color: #0e0e0e;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 9px 20px;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-filter:hover { opacity: 0.85; }
+
+.btn-clear {
+    background: transparent;
+    color: var(--text-muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 9px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.btn-clear:hover {
+    border-color: var(--text-muted);
+    color: var(--text-soft);
+}
+
+/* ─── RESULTS HEADER ──────────────────────── */
+
+.results-header {
+    padding: 16px 40px;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.results-count {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.results-filtered {
+    color: var(--gold);
+}
+
+/* ─── CARDS GRID ──────────────────────────── */
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+}
+
+.prop-card {
+    background: var(--bg-panel);
+    padding: 24px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    animation: fadeUp 0.4s ease both;
+}
+
+.prop-card:hover {
+    background: var(--bg-panel2);
+}
+
+/* Gold underline on hover */
+.prop-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    transition: width 0.3s ease;
+}
+
+.prop-card:hover::after { width: 100%; }
+
+/* ── Card header ── */
+
+.prop-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.prop-source {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 2px;
+}
+
+.prop-source--zonaprop {
+    background: rgba(59, 130, 246, 0.12);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.25);
+}
+
+.prop-source--argenprop {
+    background: rgba(16, 185, 129, 0.12);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.prop-neighborhood {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* ── Card body ── */
+
+.prop-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.prop-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.prop-currency {
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 400;
+}
+
+.prop-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1;
+}
+
+.prop-no-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+.prop-expensas {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: -4px;
+}
+
+.prop-title {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-soft);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.prop-address {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+/* ── Card footer: attribute chips ── */
+
+.prop-card-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border-soft);
+}
+
+.prop-chip {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 2px;
+}
+
+/* ─── PAGINATION ──────────────────────────── */
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 32px 40px;
+    border-top: 1px solid var(--border-soft);
+}
+
+.btn-page {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 8px 20px;
+    border-radius: var(--radius);
+    transition: all 0.2s ease;
+}
+
+.btn-page:hover {
+    border-color: var(--gold-dim);
+    color: var(--gold);
+}
+
+.page-info {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+}
+
+/* ─── EMPTY STATE ─────────────────────────── */
+
+.empty-state {
+    text-align: center;
+    padding: 80px 40px;
+}
+
+.empty-icon { font-size: 40px; margin-bottom: 16px; }
+
+.empty-state p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    margin-bottom: 24px;
+    color: var(--text-muted);
+}
+
+/* ─── RESPONSIVE ──────────────────────────── */
+
+@media (max-width: 768px) {
+    .filters-bar    { padding: 20px; }
+    .filters-form   { flex-direction: column; }
+    .filter-group,
+    .filter-select,
+    .filter-input   { min-width: 100%; width: 100%; }
+    .results-header { padding: 12px 20px; }
+    .cards-grid     { grid-template-columns: 1fr; }
+}

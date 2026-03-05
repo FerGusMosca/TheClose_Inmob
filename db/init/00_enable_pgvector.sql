@@ -1,0 +1,1 @@
+DATABASE_URL=postgresql://theclose:theclose123@localhost:5432/theclose_inmob

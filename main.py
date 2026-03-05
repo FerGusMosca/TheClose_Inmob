@@ -6,6 +6,7 @@ import uvicorn
 from starlette.middleware.sessions import SessionMiddleware
 from common.config.settings import get_settings
 from controllers.dashboard_controller import DashboardController
+from controllers.property_controller import PropertyController
 
 settings = get_settings()
 app = FastAPI()
@@ -31,6 +32,9 @@ async def main_page(request: Request):
 
 main_dashboard = DashboardController()
 app.include_router(main_dashboard.router)
+
+properties = PropertyController()
+app.include_router(properties.router)
 
 
 # ===========================
