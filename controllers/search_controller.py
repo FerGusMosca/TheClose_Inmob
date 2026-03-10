@@ -82,11 +82,13 @@ def _to_card(p) -> dict:
 _NEIGHBORHOOD_MAP = {
     "belgrano": "belgrano", "recoleta": "recoleta", "palermo": "palermo",
     "caballito": "caballito", "nunez": "nunez", "núñez": "nunez",
+    "cañitas": "las-canitas", "canitas": "las-canitas", "las cañitas": "las-canitas",
     "villa urquiza": "villa-urquiza", "almagro": "almagro",
     "villa crespo": "villa-crespo", "san telmo": "san-telmo",
     "puerto madero": "puerto-madero", "flores": "flores",
     "floresta": "floresta", "colegiales": "colegiales",
     "barrio norte": "recoleta", "retiro": "retiro",
+    "saavedra": "saavedra", "boedo": "boedo",
 }
 
 def _extract_neighborhood(query: str):

@@ -12,7 +12,6 @@
 
 <div class="admin-wrap">
 
-    <!-- HEADER -->
     <div class="admin-header">
         <div class="admin-header-text">
             <h2 class="admin-title">Data Pipeline</h2>
@@ -24,7 +23,6 @@
         </div>
     </div>
 
-    <!-- STEPS -->
     <div class="steps-grid">
 
         <!-- ── STEP 1A: Argenprop ── -->
@@ -38,12 +36,12 @@
                     </div>
                     <span class="step-badge badge--argenprop">argenprop</span>
                 </div>
-
                 <div class="step-controls">
                     <div class="control-group">
                         <label class="control-label">Neighborhood</label>
                         <select class="control-select" id="ap-neighborhood">
                             <option value="belgrano">Belgrano</option>
+                            <option value="las-canitas">Las Cañitas</option>
                             <option value="palermo">Palermo</option>
                             <option value="recoleta">Recoleta</option>
                             <option value="nunez">Nuñez</option>
@@ -64,12 +62,10 @@
                         <label class="control-label">Max pages</label>
                         <input type="number" class="control-input" id="ap-pages" value="3" min="1" max="20">
                     </div>
-                    <button class="btn-run" id="btn-scrape_argenprop"
-                            onclick="runScrape('argenprop')">
+                    <button class="btn-run" id="btn-scrape_argenprop" onclick="runScrape('argenprop')">
                         <span class="btn-icon">▶</span> Run
                     </button>
                 </div>
-
                 <div class="step-progress" id="progress-scrape_argenprop">
                     <div class="progress-bar" id="bar-scrape_argenprop"></div>
                 </div>
@@ -87,12 +83,12 @@
                     </div>
                     <span class="step-badge badge--zonaprop">zonaprop</span>
                 </div>
-
                 <div class="step-controls">
                     <div class="control-group">
                         <label class="control-label">Neighborhood</label>
                         <select class="control-select" id="zp-neighborhood">
                             <option value="belgrano">Belgrano</option>
+                            <option value="las-canitas">Las Cañitas</option>
                             <option value="palermo">Palermo</option>
                             <option value="recoleta">Recoleta</option>
                             <option value="nunez">Nuñez</option>
@@ -113,12 +109,10 @@
                         <label class="control-label">Max pages</label>
                         <input type="number" class="control-input" id="zp-pages" value="3" min="1" max="20">
                     </div>
-                    <button class="btn-run" id="btn-scrape_zonaprop"
-                            onclick="runScrape('zonaprop')">
+                    <button class="btn-run" id="btn-scrape_zonaprop" onclick="runScrape('zonaprop')">
                         <span class="btn-icon">▶</span> Run
                     </button>
                 </div>
-
                 <div class="step-progress" id="progress-scrape_zonaprop">
                     <div class="progress-bar" id="bar-scrape_zonaprop"></div>
                 </div>
@@ -136,7 +130,6 @@
                     </div>
                     <span class="step-badge badge--db">PostgreSQL</span>
                 </div>
-
                 <div class="step-controls">
                     <div class="control-group">
                         <label class="control-label">Portals</label>
@@ -153,7 +146,6 @@
                         <span class="btn-icon">▶</span> Run
                     </button>
                 </div>
-
                 <div class="step-progress" id="progress-insert">
                     <div class="progress-bar" id="bar-insert"></div>
                 </div>
@@ -171,7 +163,6 @@
                     </div>
                     <span class="step-badge badge--ai">OpenAI</span>
                 </div>
-
                 <div class="step-controls">
                     <p class="step-desc">
                         Generates <code>text-embedding-3-small</code> vectors for all
@@ -181,7 +172,6 @@
                         <span class="btn-icon">▶</span> Run
                     </button>
                 </div>
-
                 <div class="step-progress" id="progress-embed">
                     <div class="progress-bar" id="bar-embed"></div>
                 </div>
@@ -190,7 +180,6 @@
 
     </div>
 
-    <!-- LIVE LOG CONSOLE -->
     <div class="log-panel">
         <div class="log-header">
             <span class="log-title">Live Log</span>

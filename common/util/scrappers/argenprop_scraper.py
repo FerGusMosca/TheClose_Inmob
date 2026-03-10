@@ -21,12 +21,19 @@ log = logging.getLogger(__name__)
 class ArgenpropScraper:
     BASE_URL_TEMPLATE = "https://www.argenprop.com/departamento-venta-barrio-{neighborhood}"
 
+    _CUSTOM_URLS = {
+        "las-canitas": "https://www.argenprop.com/departamentos/venta/las-canitas",
+    }
+
     def __init__(self, headless: bool = True, page_wait: float = 2.0):
         self.headless  = headless
         self.page_wait = page_wait
 
     def scrape(self, neighborhood_slug: str, max_pages: int = 5) -> list[Property]:
-        base_url = self.BASE_URL_TEMPLATE.format(neighborhood=neighborhood_slug)
+        base_url = self._CUSTOM_URLS.get(
+            neighborhood_slug,
+            self.BASE_URL_TEMPLATE.format(neighborhood=neighborhood_slug)
+        )
         log.info("ArgenpropScraper.scrape | url=%s max_pages=%d", base_url, max_pages)
         driver = self._build_driver()
         try:
